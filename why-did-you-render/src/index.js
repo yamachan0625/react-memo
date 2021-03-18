@@ -1,14 +1,9 @@
+import './wdyr';
+
 import React from 'react';
 
 import ReactDOM from 'react-dom';
 import App from './App';
-import whyDidYouRender from '@welldone-software/why-did-you-render';
-whyDidYouRender(React, {
-  onlyLogs: true,
-  titleColor: 'green',
-  diffNameColor: 'aqua',
-  trackAllPureComponents: true,
-});
 
 ReactDOM.render(<App />, document.getElementById('root'));
 ReactDOM.render(<App />, document.getElementById('root'));

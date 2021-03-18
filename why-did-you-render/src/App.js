@@ -6,6 +6,7 @@ import { StyleProp3 } from './StyleProp3';
 import { Tooltip } from './Tooltip';
 import { Parent } from './Parent';
 import { Child } from './Child';
+import { EmptyArray } from './EmptyArray';
 
 // これら全て再レンダリングの要因になる
 // {
@@ -43,6 +44,10 @@ const App = React.memo(() => {
 
   console.log('render App');
 
+  const a = undefined;
+
+  const emtyArr = React.useMemo(() => a || [], [a]);
+
   return (
     <div style={{ padding: 20 }}>
       {'Hi '}
@@ -78,6 +83,7 @@ const App = React.memo(() => {
       <Parent>
         <Child />
       </Parent>
+      <EmptyArray arr={emtyArr} />
     </div>
   );
 });
