@@ -1,41 +1,16 @@
 import React from 'react';
-// import dynamic from 'next/dynamic';
-// import moment from 'moment';
+import dynamic from 'next/dynamic';
+// import { Lodash } from '../components/Lodash';
 
-// lodash使用コンポーネントを使用していなくてもimportしているだけでファイルサイズがでかくなる
-// かつlodashが含まれてしまう。未使用コンポーネントはimportを避ける必要がある。
-import { Lodash } from '../components/Lodash';
-// import _ from 'lodash';
+const DynamicLodash = dynamic(() => import('../components/Lodash'));
 
-const users = [
-  { id: 1, name: '太郎' },
-  { id: 2, name: '次郎' },
-  { id: 3, name: '三郎' },
-  { id: 4, name: '四郎' },
-  { id: 5, name: '五郎' },
-];
-
-// dynamic importで読み込むとlodashは初期bundleに含まれない。
-// const DynamicLodash = dynamic(() => import('../components/Lodash'));
-
-const Dynamic = () => {
-  const [username, setusername] = React.useState('名無し');
-  const handleClick = async () => {
-    // lodashが他コンポーネントに依存しない場合に限りclick時にchunkが吐き出される
-    const _ = (await import('lodash')).default;
-    const user = _.find(users, { id: 1 });
-    setusername(user.name);
-  };
-
-  // const day = moment().format('MMMM Do YYYY, h:mm:ss a');
-
+export const dynamicComp = () => {
+  const [check, setCheck] = React.useState(false);
   return (
     <div>
-      {username}
-      {/* {day} */}
-      <button onClick={handleClick}>変更</button>
-      <Lodash />
-      {/*      <DynamicLodash /> */}
+      {/* <Lodash /> */}
+      {/* {check ? <DynamicLodash /> : 'sno check'} */}
+      <button onClick={() => setCheck((prev) => !prev)}>check</button>
       <div>
         アイウエオアイウエオアイウエオアイウエオアイウエオアイウエオアイウエオ
       </div>{' '}
@@ -447,8 +422,9 @@ const Dynamic = () => {
       <div>
         アイウエオアイウエオアイウエオアイウエオアイウエオアイウエオアイウエオ
       </div>
+      <DynamicLodash />
     </div>
   );
 };
 
-export default Dynamic;
+export default dynamicComp;
