@@ -7,6 +7,7 @@ import Import from '../components/Import';
 
 export const desktop = () => {
   const [isDesktop, setIsDesktop] = React.useState(true);
+  // このやり方だとクライアント側でしかレンダリングしない(SSRできない)
   const page = (
     <Import
       isDesktop={isDesktop}
